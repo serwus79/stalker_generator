@@ -73,7 +73,7 @@ Poniższa tabela dzieli plan na mniejsze kroki; kolumna `Docs` linkuje do szczeg
 |   7 | Dodać historię w `localStorage` i eksport/import snapshotów | Completed   | [docs/steps/07-history-localstorage.md](docs/steps/07-history-localstorage.md)                 |
 |   8 | Lokalizacja UI — język polski (i plik `locales/pl.json`)    | Completed   | [docs/steps/12-localization.md](docs/steps/12-localization.md)                                 |
 |   9 | Responsywność, dostępność (A11y) i UX polish                | Completed   | [docs/steps/08-responsiveness-accessibility.md](docs/steps/08-responsiveness-accessibility.md) |
-|  10 | Testy jednostkowe i integracyjne                            | Not started | [docs/steps/09-tests.md](docs/steps/09-tests.md)                                               |
+|  10 | Testy jednostkowe i integracyjne                            | Completed   | [docs/steps/09-tests.md](docs/steps/09-tests.md)                                               |
 |  11 | Dokumentacja i README                                       | Not started | [docs/steps/10-docs-readme.md](docs/steps/10-docs-readme.md)                                   |
 |  12 | Punkty weryfikacji buildów (CI/local)                       | Not started | [docs/steps/11-build-checkpoints.md](docs/steps/11-build-checkpoints.md)                       |
 
