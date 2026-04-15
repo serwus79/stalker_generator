@@ -1,5 +1,5 @@
 /** @jsx createVNode */
-import { defineComponent, ref, h as createVNode } from 'vue'
+import { defineComponent, ref, watch, h as createVNode } from 'vue'
 import presets from '../presets/presets'
 import { artifacts, mutants, locations } from '../lib/taxonomy'
 import { FormSchema, FormSnapshot } from '../lib/formSchema'
@@ -7,12 +7,22 @@ import { buildPrompt } from '../lib/promptBuilder'
 
 export default defineComponent({
   name: 'PromptFormWithValidation',
-  emits: ['generate'],
+  emits: ['generate', 'preview'],
   setup(_, { emit }) {
     const defaultSnapshot = FormSchema.parse({}) as FormSnapshot
     const snapshot = ref<FormSnapshot>(defaultSnapshot)
     const errors = ref<Record<string, string>>({})
     const generatedPrompt = ref<string>('')
+
+    // Emit live preview whenever the snapshot changes
+    watch(snapshot, (val) => {
+      try {
+        const p = buildPrompt(val)
+        emit('preview', p)
+      } catch (e) {
+        // ignore
+      }
+    }, { deep: true, immediate: true })
 
     function validate(): boolean {
       const result = FormSchema.safeParse(snapshot.value)
@@ -102,7 +112,7 @@ export default defineComponent({
             <select id="primary-artifact" data-testid="primary-subject-artifact" value={snapshot.value.primarySubject || ''} onChange={(e: Event) => (snapshot.value.primarySubject = (e.target as HTMLSelectElement).value)}>
               <option value="">— wybierz artefakt —</option>
               {artifacts.map(a => (
-                <option value={a.id}>{a.name}</option>
+                <option value={a.name}>{a.name}</option>
               ))}
             </select>
           </div>
@@ -136,9 +146,7 @@ export default defineComponent({
           <button onClick={generate}>Generuj prompt</button>
         </div>
 
-        {generatedPrompt.value && (
-          <pre data-testid="generated-prompt" style={{ marginTop: '12px', whiteSpace: 'pre-wrap' }}>{generatedPrompt.value}</pre>
-        )}
+        {/* Preview is emitted to parent via 'preview' event — parent is responsible for layout */}
 
       </div>
     )

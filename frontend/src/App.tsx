@@ -1,5 +1,6 @@
-import { defineComponent, ref } from 'vue'
-import PromptForm from './components/PromptForm'
+/** @jsx createVNode */
+import { defineComponent, ref, h as createVNode } from 'vue'
+import PromptFormWithValidation from './components/PromptFormWithValidation'
 import Preview from './components/Preview'
 
 export default defineComponent({
@@ -11,12 +12,16 @@ export default defineComponent({
       prompt.value = p
     }
 
+    function onPreview(p: string) {
+      prompt.value = p
+    }
+
     return () => (
       <div style={{ padding: '16px', fontFamily: 'system-ui' }}>
         <h1>Generator promptów — Dzieci Zony</h1>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
           <div style={{ flex: 1 }}>
-            <PromptForm onGenerate={onGenerate} />
+            <PromptFormWithValidation onGenerate={onGenerate} onPreview={onPreview} />
           </div>
           <div style={{ width: '45%' }}>
             <Preview prompt={prompt.value} />
