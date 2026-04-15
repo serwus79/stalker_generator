@@ -1,0 +1,9 @@
+{
+  "app": {
+    "title": "Generator promptów — Dzieci Zony",
+    "generate": "Generuj prompt",
+    "copy": "Kopiuj",
+    "save": "Zapisz",
+    "load": "Wczytaj"
+  }
+}

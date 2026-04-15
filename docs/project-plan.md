@@ -64,7 +64,7 @@ Poniższa tabela dzieli plan na mniejsze kroki; kolumna `Docs` linkuje do szczeg
 
 |   # | Krok                                                        |   Status    | Dokumentacja                                                                                   |
 | --: | ----------------------------------------------------------- | :---------: | ---------------------------------------------------------------------------------------------- |
-|   1 | Scaffold projektu (Vite + Vue 3 + TSX + Pinia + Router)     | Not started | [docs/steps/01-scaffold.md](docs/steps/01-scaffold.md)                                         |
+|   1 | Scaffold projektu (Vite + Vue 3 + TSX + Pinia + Router)     | Completed   | [docs/steps/01-scaffold.md](docs/steps/01-scaffold.md)                                         |
 |   2 | Przenieść presety (16 scen) do `PromptPresetCatalog`        | Not started | [docs/steps/02-presets.md](docs/steps/02-presets.md)                                           |
 |   3 | Zaimplementować `UniverseTaxonomy` (słowniki)               | Not started | [docs/steps/03-taxonomy.md](docs/steps/03-taxonomy.md)                                         |
 |   4 | Napisać `PromptBuilderEngine` (reguły i profile)            | Not started | [docs/steps/04-prompt-builder-engine.md](docs/steps/04-prompt-builder-engine.md)               |
