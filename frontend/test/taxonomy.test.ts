@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import taxonomy, { artifacts, factions, mutants, locations, anomalies } from '../src/lib/taxonomy'
+import taxonomy, { artifacts, factions, mutants, locations } from '../src/lib/taxonomy'
 
 describe('taxonomy', () => {
   it('exports non-empty factions', () => {

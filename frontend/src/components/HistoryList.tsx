@@ -1,6 +1,5 @@
-/** @jsx createVNode */
-import { defineComponent, ref, onMounted, watch, h as createVNode } from 'vue'
-import historyStore, { loadHistory, deleteEntry as deleteEntryStore } from '../store/historyStore'
+import { defineComponent, ref, onMounted, watch } from 'vue'
+import { loadHistory, deleteEntry as deleteEntryStore } from '../store/historyStore'
 import useLocale from '../locales/useLocale'
 
 export default defineComponent({
@@ -38,7 +37,7 @@ export default defineComponent({
           document.execCommand('copy')
           ta.remove()
         }
-      } catch (err) {
+      } catch {
         // ignore
       }
     }
@@ -54,7 +53,7 @@ export default defineComponent({
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(json)
         }
-      } catch (err) {
+      } catch {
         // ignore
       }
     }

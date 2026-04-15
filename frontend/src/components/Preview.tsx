@@ -1,5 +1,4 @@
-/** @jsx createVNode */
-import { defineComponent, ref, computed, h as createVNode } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import useLocale from '../locales/useLocale'
 
 export default defineComponent({
@@ -31,7 +30,7 @@ export default defineComponent({
         }
         copied.value = true
         setTimeout(() => (copied.value = false), 1400)
-      } catch (e) {
+      } catch {
         // ignore copy errors in tests/environments
       }
     }

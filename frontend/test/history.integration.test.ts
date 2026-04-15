@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import App from '../src/App'
-import { clearHistory, loadHistory } from '../src/store/historyStore'
+import { clearHistory } from '../src/store/historyStore'
 
 describe('History UI integration', () => {
   beforeEach(() => {
-    try { clearHistory() } catch (e) {}
+    try { clearHistory() } catch { /* ignore */ }
   })
 
   it('saves current prompt and loads it back into the form', async () => {

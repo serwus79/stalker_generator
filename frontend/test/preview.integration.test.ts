@@ -10,8 +10,8 @@ describe('Preview live update and copy (App)', () => {
         value: { writeText },
         configurable: true,
       })
-    } catch (e) {
-      ;(navigator as any).clipboard = { writeText }
+    } catch {
+      (navigator as any).clipboard = { writeText }
     }
 
     const wrapper = mount(App)

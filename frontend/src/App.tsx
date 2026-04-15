@@ -1,6 +1,4 @@
-/** @jsx createVNode */
-/** @jsx createVNode */
-import { defineComponent, ref, h as createVNode } from 'vue'
+import { defineComponent, ref } from 'vue'
 import PromptFormWithValidation from './components/PromptFormWithValidation'
 import Preview from './components/Preview'
 import HistoryList from './components/HistoryList'

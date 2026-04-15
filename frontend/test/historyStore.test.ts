@@ -5,11 +5,11 @@ describe('historyStore', () => {
   beforeEach(() => {
     try {
       clearHistory()
-    } catch (e) {}
+    } catch { /* ignore */ }
   })
 
   it('saves and loads entries', () => {
-    const entry = saveEntry({ title: 't1', formSnapshot: { a: 1 }, generatedPrompt: 'p1' })
+    saveEntry({ title: 't1', formSnapshot: { a: 1 }, generatedPrompt: 'p1' })
     const all = loadHistory()
     expect(all.length).toBeGreaterThanOrEqual(1)
     expect(all[0].generatedPrompt).toBe('p1')

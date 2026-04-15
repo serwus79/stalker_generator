@@ -1,5 +1,4 @@
-/** @jsx createVNode */
-import { defineComponent, ref, watch, h as createVNode, PropType } from 'vue'
+import { defineComponent, ref, watch, PropType } from 'vue'
 import presets from '../presets/presets'
 import { artifacts, mutants, locations } from '../lib/taxonomy'
 import { FormSchema, FormSnapshot } from '../lib/formSchema'
@@ -19,20 +18,20 @@ export default defineComponent({
     const generatedPrompt = ref<string>('')
     const { t } = useLocale()
 
+    function snapshotsEqual(a: FormSnapshot, b: FormSnapshot) {
+      const keys: (keyof FormSnapshot)[] = ['ageGroup','orientation','lineWeight','detailLevel','composition','dpi','marginMm','enforceNoGray','outputLanguage','subjectType','primarySubject','subjectDescription','presetId']
+      for (const k of keys) {
+        if ((a as any)[k] !== (b as any)[k]) return false
+      }
+      return true
+    }
+
     // Restore snapshot when parent provides one
     watch(() => props.loadedSnapshot, (ns) => {
       if (ns) {
         // Merge provided partial snapshot into current snapshot and validate with Zod
         const merged = { ...snapshot.value, ...(ns as Partial<FormSnapshot>) }
         const parsed = FormSchema.safeParse(merged)
-        // Avoid assigning if the merged/parsed snapshot is identical to the current one
-        function snapshotsEqual(a: FormSnapshot, b: FormSnapshot) {
-          const keys: (keyof FormSnapshot)[] = ['ageGroup','orientation','lineWeight','detailLevel','composition','dpi','marginMm','enforceNoGray','outputLanguage','subjectType','primarySubject','subjectDescription','presetId']
-          for (const k of keys) {
-            if ((a as any)[k] !== (b as any)[k]) return false
-          }
-          return true
-        }
 
         if (parsed.success) {
           if (!snapshotsEqual(snapshot.value, parsed.data)) snapshot.value = parsed.data
@@ -49,7 +48,7 @@ export default defineComponent({
       try {
         const p = buildPrompt(val)
         emit('preview', { prompt: p, snapshot: val })
-      } catch (e) {
+      } catch {
         // ignore
       }
     }, { deep: true, immediate: true })
