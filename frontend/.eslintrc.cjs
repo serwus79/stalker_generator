@@ -17,6 +17,14 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'no-console': 'off',
   },
+  overrides: [
+    {
+      files: ['**/*.tsx'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^h$' }],
+      },
+    },
+  ],
   settings: {
     'vue/setup-compiler-macros': true,
   },

@@ -3,14 +3,17 @@ import { buildPrompt } from '../../src/lib/promptBuilder'
 
 describe('promptBuilder parameter coverage', () => {
   it('includes primarySubject for location (x18)', () => {
-    const p = buildPrompt({ subjectType: 'location', primarySubject: 'x18' })
+    const p = buildPrompt({
+      subjects: [{ id: '1', subjectType: 'location', primarySubject: 'x18' }],
+    })
     expect(p).toContain('x18')
   })
 
   it('uses subjectDescription when provided instead of primarySubject', () => {
-    const p = buildPrompt({ primarySubject: 'x18', subjectDescription: 'Laboratorium X18, tajne' })
+    const p = buildPrompt({
+      subjects: [{ id: '1', subjectType: 'location', primarySubject: 'x18', subjectDescription: 'Laboratorium X18, tajne' }],
+    })
     expect(p).toContain('Laboratorium X18, tajne')
-    expect(p).not.toContain('Temat: x18')
   })
 
   it('reflects DPI and orientation', () => {

@@ -4,7 +4,14 @@ import buildPromptForProfile from '../../src/lib/promptBuilderEngine'
 
 describe('promptBuilder unit tests', () => {
   it('builds landscape prompt with specified DPI and subject', () => {
-    const p = buildPrompt({ ageGroup: 'under_10', primarySubject: 'artifactX', lineWeight: 'very_thick', orientation: 'A4_landscape', dpi: 600, marginMm: 5 })
+    const p = buildPrompt({
+      ageGroup: 'under_10',
+      subjects: [{ id: '1', subjectType: 'artifact', primarySubject: 'artifactX' }],
+      lineWeight: 'very_thick',
+      orientation: 'A4_landscape',
+      dpi: 600,
+      marginMm: 5,
+    })
     expect(p).toContain('pozioma')
     expect(p).toContain('600 DPI')
     expect(p).toContain('artifactX')

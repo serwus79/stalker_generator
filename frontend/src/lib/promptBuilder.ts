@@ -1,7 +1,8 @@
+import type { SubjectEntry } from './formSchema'
+
 export type Snapshot = {
   ageGroup?: string
-  primarySubject?: string
-  subjectDescription?: string
+  subjects?: SubjectEntry[]
   lineWeight?: string
   detailLevel?: string
   orientation?: string
@@ -12,9 +13,78 @@ export type Snapshot = {
   outputLanguage?: string
 }
 
+/**
+ * Map subject type to English label
+ */
+function getSubjectTypeLabel(type?: string): string {
+  const map: Record<string, string> = {
+    character: 'character',
+    artifact: 'artifact',
+    anomaly: 'anomaly',
+    mutant: 'mutant',
+    location: 'location',
+    mixed: 'mixed',
+  }
+  return map[type || 'mixed'] || 'subject'
+}
+
+/**
+ * Map subject type to Polish label
+ */
+function getSubjectTypeLabelPl(type?: string): string {
+  const map: Record<string, string> = {
+    character: 'postać',
+    artifact: 'artefakt',
+    anomaly: 'anomalia',
+    mutant: 'mutant',
+    location: 'lokacja',
+    mixed: 'mieszane',
+  }
+  return map[type || 'mixed'] || 'przedmiot'
+}
+
+/**
+ * Build full subject description including type label
+ */
+function buildSubjectDescription(subject: SubjectEntry): string {
+  const typeLabel = getSubjectTypeLabel(subject.subjectType)
+  const parts: string[] = []
+
+  if (subject.subjectDescription) {
+    parts.push(subject.subjectDescription)
+  }
+
+  if (subject.primarySubject) {
+    parts.push(subject.primarySubject)
+  }
+
+  const detail = parts.length > 0 ? parts.join(', ') : undefined
+  return detail ? `${typeLabel}: ${detail}` : typeLabel
+}
+
+/**
+ * Build full subject description in Polish including type label
+ */
+function buildSubjectDescriptionPl(subject: SubjectEntry): string {
+  const typeLabel = getSubjectTypeLabelPl(subject.subjectType)
+  const parts: string[] = []
+
+  if (subject.subjectDescription) {
+    parts.push(subject.subjectDescription)
+  }
+
+  if (subject.primarySubject) {
+    parts.push(subject.primarySubject)
+  }
+
+  const detail = parts.length > 0 ? parts.join(', ') : undefined
+  return detail ? `${typeLabel}: ${detail}` : typeLabel
+}
+
 export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
   const s = snapshot || {}
   const lang = (s.outputLanguage || language || 'pl').toLowerCase()
+  const subjects = s.subjects || []
 
   const orientationIsLandscape = s.orientation === 'A4_landscape'
   const dpi = s.dpi || 300
@@ -29,11 +99,18 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
     }
     const ageText = ageMap[s.ageGroup ?? ''] || 'all ages'
     const lineWeight = s.lineWeight || 'medium'
-    const subject = s.subjectDescription || s.primarySubject || 'a subject from the Zone'
     const orientationText = orientationIsLandscape ? 'landscape' : 'portrait'
     const detailText = s.detailLevel || 'medium'
 
-    let prompt = `Black and white coloring page for ${ageText}, ${lineWeight} outlines, ${detailText} details, white background, printable. FORMAT: A4 ${orientationText} orientation, ${dpi} DPI, print-ready, safe print margins ${margin}mm on all sides. Inspired by the S.T.A.L.K.E.R. video game universe by GSC Game World. Subject: ${subject}. Style: ${detailText}. No text, no watermarks.`
+    // Build subjects list
+    const subjectsList = subjects
+      .map(subj => buildSubjectDescription(subj))
+      .filter(desc => desc.length > 0)
+      .join(', ')
+
+    const subject = subjectsList || 'a subject from the Zone'
+
+    let prompt = `Black and white coloring page for ${ageText}, ${lineWeight} outlines, ${detailText} details, white background, printable. FORMAT: A4 ${orientationText} orientation, ${dpi} DPI, print-ready, safe print margins ${margin}mm on all sides. Inspired by the S.T.A.L.K.E.R. video game universe by GSC Game World. Subject(s): ${subject}. Style: ${detailText}. No text, no watermarks.`
     if (s.enforceNoGray) {
       prompt += ' absolutely no gray fills, no shading, white areas only between black lines, coloring book style, print-ready'
     }
@@ -68,9 +145,15 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
   const orientationTextPl = orientationIsLandscape ? 'pozioma' : 'pionowa'
   const compositionTextPl = s.composition === 'panorama' ? 'szeroka panorama' : s.composition === 'full_figure' ? 'pełna postać' : 'kompozycja wyśrodkowana'
 
-  const subject = s.subjectDescription || s.primarySubject || 'obiekt ze Strefy'
+  // Build subjects list
+  const subjectsList = subjects
+    .map(subj => buildSubjectDescriptionPl(subj))
+    .filter(desc => desc.length > 0)
+    .join(', ')
 
-  let prompt = `Czarnobiała strona do kolorowania ${ageText}, ${lineWeightText}, ${detailText}, białe tło, gotowe do druku. FORMAT: A4 ${orientationTextPl} (${dpi} DPI), print-ready, bezpieczne marginesy ${margin}mm po wszystkich stronach, ${compositionTextPl}. Inspiracja: universum S.T.A.L.K.E.R. (GSC Game World). Temat: ${subject}. Styl: ${detailText}. Brak tekstu, brak znaków wodnych.`
+  const subject = subjectsList || 'obiekt ze Strefy'
+
+  let prompt = `Czarnobiała strona do kolorowania ${ageText}, ${lineWeightText}, ${detailText}, białe tło, gotowe do druku. FORMAT: A4 ${orientationTextPl} (${dpi} DPI), print-ready, bezpieczne marginesy ${margin}mm po wszystkich stronach, ${compositionTextPl}. Inspiracja: universum S.T.A.L.K.E.R. (GSC Game World). Tematy: ${subject}. Styl: ${detailText}. Brak tekstu, brak znaków wodnych.`
 
   if (s.enforceNoGray) {
     // the anti-gray suffix is helpful for many generators — keep it in English as a strict instruction

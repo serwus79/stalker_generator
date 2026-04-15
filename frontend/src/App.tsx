@@ -1,4 +1,5 @@
-import { defineComponent, ref } from 'vue'
+/** @jsx h */
+import { defineComponent, h, ref } from 'vue'
 import PromptFormWithValidation from './components/PromptFormWithValidation'
 import Preview from './components/Preview'
 import HistoryList from './components/HistoryList'

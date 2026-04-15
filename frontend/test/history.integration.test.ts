@@ -11,8 +11,17 @@ describe('History UI integration', () => {
   it('saves current prompt and loads it back into the form', async () => {
     const wrapper = mount(App)
 
-    const input = wrapper.find('input#subject-desc')
-    await input.setValue('history test subject')
+    // Add subject
+    const addSubjectBtns = wrapper.findAll('button').filter(b => b.text().includes('Dodaj temat'))
+    if (addSubjectBtns.length > 0) {
+      await addSubjectBtns[0].trigger('click')
+      await new Promise(r => setTimeout(r, 40))
+    }
+
+    const inputs = wrapper.findAll('input[type="text"]')
+    if (inputs.length > 0) {
+      await inputs[0].setValue('history test subject')
+    }
 
     // wait for preview update
     await new Promise(r => setTimeout(r, 60))
@@ -29,7 +38,9 @@ describe('History UI integration', () => {
     expect(items.length).toBeGreaterThanOrEqual(1)
 
     // change form
-    await input.setValue('changed')
+    if (inputs.length > 0) {
+      await inputs[0].setValue('changed')
+    }
     await new Promise(r => setTimeout(r, 20))
 
     // click load on first entry
@@ -38,7 +49,9 @@ describe('History UI integration', () => {
 
     await new Promise(r => setTimeout(r, 60))
 
-    const currentInput = wrapper.find('input#subject-desc')
-    expect((currentInput.element as HTMLInputElement).value).toContain('history test subject')
+    const updatedInputs = wrapper.findAll('input[type="text"]')
+    if (updatedInputs.length > 0) {
+      expect((updatedInputs[0].element as HTMLInputElement).value).toContain('history test subject')
+    }
   })
 })

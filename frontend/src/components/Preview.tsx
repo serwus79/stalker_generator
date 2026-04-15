@@ -1,4 +1,5 @@
-import { defineComponent, ref, computed } from 'vue'
+/** @jsx h */
+import { defineComponent, h, ref, computed } from 'vue'
 import useLocale from '../locales/useLocale'
 
 export default defineComponent({

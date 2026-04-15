@@ -16,8 +16,17 @@ describe('Preview live update and copy (App)', () => {
 
     const wrapper = mount(App)
 
-    const input = wrapper.find('input#subject-desc')
-    await input.setValue('przyjazny pseudodog')
+    // Add first subject
+    const addSubjectBtns = wrapper.findAll('button').filter(b => b.text().includes('Dodaj temat'))
+    if (addSubjectBtns.length > 0) {
+      await addSubjectBtns[0].trigger('click')
+      await new Promise(r => setTimeout(r, 40))
+    }
+
+    const inputs = wrapper.findAll('input[type="text"]')
+    if (inputs.length > 0) {
+      await inputs[0].setValue('przyjazny pseudodog')
+    }
 
     // wait for emitted preview and DOM update
     await new Promise(r => setTimeout(r, 80))

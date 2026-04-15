@@ -1,4 +1,5 @@
-import { defineComponent, ref, onMounted, watch } from 'vue'
+/** @jsx h */
+import { defineComponent, h, ref, onMounted, watch } from 'vue'
 import { loadHistory, deleteEntry as deleteEntryStore } from '../store/historyStore'
 import useLocale from '../locales/useLocale'
 

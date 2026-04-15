@@ -4,7 +4,14 @@ import buildPromptForProfile from '../src/lib/promptBuilderEngine'
 
 describe('buildPrompt', () => {
   it('generates a base prompt in Polish containing subject and orientation', () => {
-    const prompt = buildPrompt({ ageGroup: 'under_10', primarySubject: 'pseudodog', lineWeight: 'very_thick', orientation: 'A4_portrait', dpi: 300, marginMm: 10 })
+    const prompt = buildPrompt({
+      ageGroup: 'under_10',
+      subjects: [{ id: '1', subjectType: 'mutant', primarySubject: 'pseudodog' }],
+      lineWeight: 'very_thick',
+      orientation: 'A4_portrait',
+      dpi: 300,
+      marginMm: 10,
+    })
     expect(prompt).toContain('pionowa')
     expect(prompt).toContain('300 DPI')
     expect(prompt).toContain('pseudodog')
