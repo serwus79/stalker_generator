@@ -118,6 +118,16 @@ dotnet test CoreInstancer.slnx
 - **DO** verify build + tests pass at the end of every step.
 - **DO** add XML documentation comments **in Polish** to all public types/methods/properties/enum members.
 
+## Test execution policy
+
+- When running Vitest locally or in CI, always run tests in non-watch mode by passing the `--run` flag. Example invocations:
+
+  - `npm run test -- --run --silent`
+  - `pnpm test -- --run --silent`
+
+- Agents and automated scripts MUST append `-- --run` to `npm run test` (or the equivalent for the package manager) to avoid leaving processes in watch mode. Do not run Vitest without `--run` unless the user explicitly requests interactive watch mode.
+
+
 ## Step Reference
 
 The full step definitions live in `api/steps/`. Always read `api/steps/README.md` first to find the next step, then read the individual step file.

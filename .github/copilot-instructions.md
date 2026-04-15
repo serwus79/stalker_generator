@@ -37,6 +37,9 @@ Formatowanie i lint
 Developer experience
 - Dodaj `README.md` z instrukcjami uruchomienia: `npm install`, `npm run dev`, `npm run build`, `npm run test`.
 
+Testing execution note
+- Vitest domyślnie uruchamia się w trybie watch; dla zautomatyzowanych kroków i CI zawsze używaj flagi `--run`, np.: `npm run test -- --run --silent`. Agent powinien uruchamiać testy w ten sposób, aby uniknąć trybu watch, chyba że użytkownik prosi o inaczej.
+
 Postępowanie przy wątpliwościach
 - Jeśli brakuje informacji lub pojawia się niejasność, zapytaj użytkownika zamiast zgadywać. Krótkie pytania są preferowane (np. "Chcesz, żeby prompt był domyślnie po polsku czy po angielsku?").
 
