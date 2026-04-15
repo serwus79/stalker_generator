@@ -1,4 +1,5 @@
 import { defineComponent, ref, watch, PropType } from 'vue'
+import type { ZodIssue } from 'zod'
 import presets from '../presets/presets'
 import { artifacts, mutants, locations } from '../lib/taxonomy'
 import { FormSchema, FormSnapshot } from '../lib/formSchema'
@@ -56,11 +57,11 @@ export default defineComponent({
     function validate(): boolean {
       const result = FormSchema.safeParse(snapshot.value)
       if (!result.success) {
-        const zErrors: Record<string, string> = {}
-        result.error.errors.forEach(e => {
-          const key = e.path[0] as string
-          zErrors[key] = e.message
-        })
+          const zErrors: Record<string, string> = {}
+          result.error.issues.forEach((issue: ZodIssue) => {
+            const key = issue.path[0] as string
+            zErrors[key] = issue.message
+          })
         errors.value = zErrors
         return false
       }

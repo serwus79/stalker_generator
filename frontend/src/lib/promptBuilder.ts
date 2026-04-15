@@ -27,7 +27,7 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
       under_16: 'teenagers age 11-16',
       '16_plus': 'adults and older teens',
     }
-    const ageText = ageMap[s.ageGroup] || 'all ages'
+    const ageText = ageMap[s.ageGroup ?? ''] || 'all ages'
     const lineWeight = s.lineWeight || 'medium'
     const subject = s.subjectDescription || s.primarySubject || 'a subject from the Zone'
     const orientationText = orientationIsLandscape ? 'landscape' : 'portrait'
@@ -47,7 +47,7 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
     under_16: 'dla nastolatków 11-16 lat',
     '16_plus': 'dla dorosłych i starszych nastolatków',
   }
-  const ageText = ageMapPl[s.ageGroup] || 'dla wszystkich grup wiekowych'
+  const ageText = ageMapPl[s.ageGroup ?? ''] || 'dla wszystkich grup wiekowych'
 
   const lineWeightMapPl: any = {
     very_thick: 'bardzo grube kontury',
@@ -55,7 +55,7 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
     medium: 'średnie kontury',
     fine: 'drobne kontury',
   }
-  const lineWeightText = lineWeightMapPl[s.lineWeight] || 'średnie kontury'
+  const lineWeightText = lineWeightMapPl[s.lineWeight ?? ''] || 'średnie kontury'
 
   const detailMapPl: any = {
     low: 'bardzo proste kształty, duże puste obszary do kolorowania',
@@ -63,7 +63,7 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
     medium_high: 'średnio wysoki poziom detali',
     high: 'wysoki poziom detali',
   }
-  const detailText = detailMapPl[s.detailLevel] || 'średni poziom detali'
+  const detailText = detailMapPl[s.detailLevel ?? ''] || 'średni poziom detali'
 
   const orientationTextPl = orientationIsLandscape ? 'pozioma' : 'pionowa'
   const compositionTextPl = s.composition === 'panorama' ? 'szeroka panorama' : s.composition === 'full_figure' ? 'pełna postać' : 'kompozycja wyśrodkowana'

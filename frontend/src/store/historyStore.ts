@@ -1,4 +1,7 @@
-import { v4 as uuidv4 } from 'uuid'
+// Lightweight id generator to avoid depending on external typings in CI/editor
+function generateId() {
+  return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 9)
+}
 
 export interface HistoryEntry {
   id: string
@@ -29,7 +32,7 @@ export function loadHistory(): HistoryEntry[] {
 export function saveEntry(entry: Omit<HistoryEntry, 'id' | 'createdAt'>, limit = DEFAULT_LIMIT): HistoryEntry {
   const existing = loadHistory()
   const now = new Date().toISOString()
-  const full: HistoryEntry = { id: uuidv4(), createdAt: now, ...entry }
+  const full: HistoryEntry = { id: generateId(), createdAt: now, ...entry }
   existing.unshift(full)
   if (existing.length > limit) existing.length = limit
   try {
