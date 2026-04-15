@@ -1,5 +1,5 @@
 /** @jsx createVNode */
-import { defineComponent, ref, watch, h as createVNode } from 'vue'
+import { defineComponent, ref, watch, h as createVNode, PropType } from 'vue'
 import presets from '../presets/presets'
 import { artifacts, mutants, locations } from '../lib/taxonomy'
 import { FormSchema, FormSnapshot } from '../lib/formSchema'
@@ -9,7 +9,7 @@ import useLocale from '../locales/useLocale'
 export default defineComponent({
   name: 'PromptFormWithValidation',
   props: {
-    loadedSnapshot: { type: Object, default: undefined },
+    loadedSnapshot: { type: Object as PropType<Partial<FormSnapshot> | undefined>, default: undefined },
   },
   emits: ['generate', 'preview'],
   setup(props, { emit }) {
@@ -22,7 +22,25 @@ export default defineComponent({
     // Restore snapshot when parent provides one
     watch(() => props.loadedSnapshot, (ns) => {
       if (ns) {
-        snapshot.value = ns
+        // Merge provided partial snapshot into current snapshot and validate with Zod
+        const merged = { ...snapshot.value, ...(ns as Partial<FormSnapshot>) }
+        const parsed = FormSchema.safeParse(merged)
+        // Avoid assigning if the merged/parsed snapshot is identical to the current one
+        function snapshotsEqual(a: FormSnapshot, b: FormSnapshot) {
+          const keys: (keyof FormSnapshot)[] = ['ageGroup','orientation','lineWeight','detailLevel','composition','dpi','marginMm','enforceNoGray','outputLanguage','subjectType','primarySubject','subjectDescription','presetId']
+          for (const k of keys) {
+            if ((a as any)[k] !== (b as any)[k]) return false
+          }
+          return true
+        }
+
+        if (parsed.success) {
+          if (!snapshotsEqual(snapshot.value, parsed.data)) snapshot.value = parsed.data
+        } else {
+          // Fallback: coerce to FormSnapshot to preserve runtime behavior
+          const fallback = merged as FormSnapshot
+          if (!snapshotsEqual(snapshot.value, fallback)) snapshot.value = fallback
+        }
       }
     }, { deep: true, immediate: true })
 
