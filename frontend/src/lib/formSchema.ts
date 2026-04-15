@@ -13,7 +13,7 @@ export const FormSchema = z.object({
   dpi: z.number().default(300),
   marginMm: z.number().default(10),
   enforceNoGray: z.boolean().default(true),
-  outputLanguage: z.string().optional(),
+  outputLanguage: z.string().default('pl'),
 })
 
 export type FormSnapshot = z.infer<typeof FormSchema>

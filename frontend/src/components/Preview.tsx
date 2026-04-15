@@ -1,5 +1,6 @@
 /** @jsx createVNode */
 import { defineComponent, ref, computed, h as createVNode } from 'vue'
+import useLocale from '../locales/useLocale'
 
 export default defineComponent({
   name: 'Preview',
@@ -10,6 +11,8 @@ export default defineComponent({
   setup(props) {
     const copied = ref(false)
     const showText = computed(() => (props.prompt || props.text || ''))
+
+    const { t } = useLocale()
 
     async function copyToClipboard() {
       const text = showText.value || ''
@@ -39,8 +42,8 @@ export default defineComponent({
           <pre data-testid="preview-text" style={{ margin: 0, whiteSpace: 'pre-wrap' }}>{showText.value}</pre>
         </div>
         <div style={{ marginTop: '8px' }}>
-          <button data-testid="preview-copy" onClick={copyToClipboard}>Kopiuj</button>
-          {copied.value && <span data-testid="preview-toast" style={{ marginLeft: '8px' }}>Skopiowano!</span>}
+          <button data-testid="preview-copy" onClick={copyToClipboard}>{t('preview.copy')}</button>
+          {copied.value && <span data-testid="preview-toast" style={{ marginLeft: '8px' }}>{t('preview.copied')}</span>}
         </div>
       </div>
     )

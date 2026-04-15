@@ -4,6 +4,30 @@
     "generate": "Generuj prompt",
     "copy": "Kopiuj",
     "save": "Zapisz",
-    "load": "Wczytaj"
+    "load": "Wczytaj",
+    "copied": "Skopiowano!",
+    "history": "Historia"
+  }
+  ,
+  "form": {
+    "preset": "Preset",
+    "ageGroup": "Grupa wiekowa",
+    "subjectDescription": "Opis tematu (opcjonalnie)",
+    "subjectType": "Rodzaj tematu",
+    "artifact": "Artefakt",
+    "mutant": "Mutant",
+    "location": "Miejsce",
+    "outputLanguage": "Język wyniku"
+  },
+  "preview": {
+    "title": "Podgląd promptu",
+    "copy": "Kopiuj",
+    "copied": "Skopiowano!"
+  },
+  "history": {
+    "load": "Wczytaj",
+    "copy": "Kopiuj",
+    "delete": "Usuń",
+    "export": "Eksportuj"
   }
 }
