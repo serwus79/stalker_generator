@@ -1,5 +1,7 @@
 # Krok 11 — Punkty weryfikacji buildów
 
+## Status: `completed`
+
 Cel
 - Mieć jasne punkty kontrolne, po których wykonujemy kompilację i sprawdzamy, czy projekt się buduje.
 
@@ -18,5 +20,15 @@ cd frontend
 npm install
 npm run dev
 npm run build
-npm run test
+npm run test -- --run --silent
 ```
+
+## Notatka agenta
+
+- Dodano prostą konfigurację CI w `.github/workflows/ci.yml`, która na `push` i `pull_request` uruchamia:
+	- `npm ci` w `frontend`
+	- `npm run build` w `frontend`
+	- `npm run test -- --run --silent` w `frontend`
+
+- Lokalnie uruchomione: `npm run test -- --run --silent` (wszystkie testy przeszły) oraz `npm run build` (build produkcyjny udany).
+

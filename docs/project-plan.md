@@ -75,7 +75,7 @@ Poniższa tabela dzieli plan na mniejsze kroki; kolumna `Docs` linkuje do szczeg
 |   9 | Responsywność, dostępność (A11y) i UX polish                | Completed   | [docs/steps/08-responsiveness-accessibility.md](docs/steps/08-responsiveness-accessibility.md) |
 |  10 | Testy jednostkowe i integracyjne                            | Completed   | [docs/steps/09-tests.md](docs/steps/09-tests.md)                                               |
 |  11 | Dokumentacja i README                                       | Completed   | [docs/steps/10-docs-readme.md](docs/steps/10-docs-readme.md)                                   |
-|  12 | Punkty weryfikacji buildów (CI/local)                       | Not started | [docs/steps/11-build-checkpoints.md](docs/steps/11-build-checkpoints.md)                       |
+|  12 | Punkty weryfikacji buildów (CI/local)                       | Completed   | [docs/steps/11-build-checkpoints.md](docs/steps/11-build-checkpoints.md)                       |
 
 ## Build verification checkpoints
 
