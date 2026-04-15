@@ -155,7 +155,7 @@ export default defineComponent({
         )}
 
         <div style={{ marginTop: '8px' }}>
-          <button onClick={generate}>{t('app.generate')}</button>
+          <button aria-label={t('app.generate')} onClick={generate}>{t('app.generate')}</button>
         </div>
 
         {/* Preview is emitted to parent via 'preview' event — parent is responsible for layout */}

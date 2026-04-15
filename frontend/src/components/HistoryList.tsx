@@ -77,10 +77,10 @@ export default defineComponent({
                   <span style={{ marginLeft: '10px' }}>{t('form.dpi', 'DPI')}: {en.formSnapshot?.dpi ?? '—'}</span>
                 </div>
                 <div style={{ marginTop: '6px' }}>
-                <button data-testid="history-load" onClick={() => handleLoad(en)}>{t('history.load')}</button>
-                <button data-testid="history-copy" onClick={() => handleCopy(en)} style={{ marginLeft: '6px' }}>{t('history.copy')}</button>
-                <button data-testid="history-delete" onClick={() => handleDelete(en.id)} style={{ marginLeft: '6px' }}>{t('history.delete')}</button>
-                <button data-testid="history-export" onClick={() => handleExport(en)} style={{ marginLeft: '6px' }}>{t('history.export')}</button>
+                <button data-testid="history-load" aria-label={t('history.load')} onClick={() => handleLoad(en)}>{t('history.load')}</button>
+                <button data-testid="history-copy" aria-label={t('history.copy')} onClick={() => handleCopy(en)} style={{ marginLeft: '6px' }}>{t('history.copy')}</button>
+                <button data-testid="history-delete" aria-label={t('history.delete')} onClick={() => handleDelete(en.id)} style={{ marginLeft: '6px' }}>{t('history.delete')}</button>
+                <button data-testid="history-export" aria-label={t('history.export')} onClick={() => handleExport(en)} style={{ marginLeft: '6px' }}>{t('history.export')}</button>
               </div>
             </li>
           ))}

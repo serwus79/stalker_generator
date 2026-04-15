@@ -39,7 +39,7 @@ export default defineComponent({
         </select>
 
         <div style={{ marginTop: '8px' }}>
-          <button onClick={generate}>{t('app.generate')}</button>
+          <button aria-label={t('app.generate')} onClick={generate}>{t('app.generate')}</button>
         </div>
       </div>
     )

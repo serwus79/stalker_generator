@@ -42,8 +42,8 @@ export default defineComponent({
           <pre data-testid="preview-text" style={{ margin: 0, whiteSpace: 'pre-wrap' }}>{showText.value}</pre>
         </div>
         <div style={{ marginTop: '8px' }}>
-          <button data-testid="preview-copy" onClick={copyToClipboard}>{t('preview.copy')}</button>
-          {copied.value && <span data-testid="preview-toast" style={{ marginLeft: '8px' }}>{t('preview.copied')}</span>}
+          <button data-testid="preview-copy" aria-label={t('preview.copy')} onClick={copyToClipboard}>{t('preview.copy')}</button>
+          {copied.value && <span data-testid="preview-toast" role="status" aria-live="polite" style={{ marginLeft: '8px' }}>{t('preview.copied')}</span>}
         </div>
       </div>
     )
