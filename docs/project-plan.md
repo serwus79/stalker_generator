@@ -65,7 +65,7 @@ Poniższa tabela dzieli plan na mniejsze kroki; kolumna `Docs` linkuje do szczeg
 |   # | Krok                                                        |   Status    | Dokumentacja                                                                                   |
 | --: | ----------------------------------------------------------- | :---------: | ---------------------------------------------------------------------------------------------- |
 |   1 | Scaffold projektu (Vite + Vue 3 + TSX + Pinia + Router)     | Completed   | [docs/steps/01-scaffold.md](docs/steps/01-scaffold.md)                                         |
-|   2 | Przenieść presety (16 scen) do `PromptPresetCatalog`        | Not started | [docs/steps/02-presets.md](docs/steps/02-presets.md)                                           |
+|   2 | Przenieść presety (16 scen) do `PromptPresetCatalog`        | Completed   | [docs/steps/02-presets.md](docs/steps/02-presets.md)                                           |
 |   3 | Zaimplementować `UniverseTaxonomy` (słowniki)               | Not started | [docs/steps/03-taxonomy.md](docs/steps/03-taxonomy.md)                                         |
 |   4 | Napisać `PromptBuilderEngine` (reguły i profile)            | Not started | [docs/steps/04-prompt-builder-engine.md](docs/steps/04-prompt-builder-engine.md)               |
 |   5 | Zbudować formularz z walidacją (Zod) i dependency fields    | Not started | [docs/steps/05-form-validation.md](docs/steps/05-form-validation.md)                           |
@@ -82,7 +82,7 @@ Poniższa tabela dzieli plan na mniejsze kroki; kolumna `Docs` linkuje do szczeg
 Poniżej znajdują się punkty kontrolne, po których wykonamy sprawdzenie, czy aplikacja się buduje i działa poprawnie.
 
 - [ ] After scaffold: start dev server and run production build (`npm run dev`, `npm run build`) — confirm build succeeds and dev server runs.
-- [ ] After presets added: run `npm run build` — confirm no build errors.
+- [x] After presets added: run `npm run build` — confirm no build errors.
 - [ ] After `PromptBuilderEngine`: run `npm run build` and unit tests (`npm test`) — confirm compilation and tests pass.
 - [ ] After form implementation: run `npm run build` and perform a smoke UI test (open app, check console errors).
 - [ ] After history support: run `npm run build` and verify persistence across reloads.
