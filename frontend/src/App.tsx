@@ -5,7 +5,6 @@ import PromptFormWithValidation from './components/PromptFormWithValidation'
 import Preview from './components/Preview'
 import HistoryList from './components/HistoryList'
 import useLocale from './locales/useLocale'
-import './styles/responsive.css'
 import { saveEntry } from './store/historyStore'
 
 export default defineComponent({

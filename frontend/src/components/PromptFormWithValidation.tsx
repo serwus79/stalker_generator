@@ -73,7 +73,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div>
+      <div class="card form-card">
         <div>
           <label htmlFor="preset-select">{t('form.preset')}</label>
           <select id="preset-select" data-testid="preset-select" value={snapshot.value.presetId || ''} onChange={(e: Event) => { const v = (e.target as HTMLSelectElement).value; applyPreset(v) }}>

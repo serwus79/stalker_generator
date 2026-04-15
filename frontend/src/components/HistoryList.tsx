@@ -60,7 +60,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div>
+      <div class="card history-card">
         <h3>{t('app.history')}</h3>
         <ul data-testid="history-list">
           {entries.value.map(en => (

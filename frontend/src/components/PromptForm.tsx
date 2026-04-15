@@ -23,7 +23,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div>
+      <div class="card form-card">
         <label style={{ display: 'block', marginBottom: '4px' }}>{t('form.ageGroup')}</label>
         <select
           value={snapshot.value.ageGroup}

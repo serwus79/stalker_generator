@@ -37,9 +37,9 @@ export default defineComponent({
     }
 
     return () => (
-      <div>
-        <div style={{ border: '1px solid #ddd', padding: '8px', borderRadius: '4px', background: '#fff' }}>
-          <pre data-testid="preview-text" style={{ margin: 0, whiteSpace: 'pre-wrap' }}>{showText.value}</pre>
+      <div class="card preview-card">
+        <div class="preview-container">
+          <pre data-testid="preview-text">{showText.value}</pre>
         </div>
         <div style={{ marginTop: '8px' }}>
           <button data-testid="preview-copy" aria-label={t('preview.copy')} onClick={copyToClipboard}>{t('preview.copy')}</button>

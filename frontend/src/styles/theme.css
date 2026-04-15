@@ -1,0 +1,93 @@
+:root{
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --muted: #f0f2f6;
+  --accent: #0a84ff;
+  --accent-600: #0366d6;
+  --text: #0f1724;
+  --muted-text: #556074;
+  --border: #e6e9ef;
+  --radius: 10px;
+  --shadow: 0 6px 18px rgba(20,30,50,0.08);
+  --card-padding: 16px;
+}
+
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
+  font-size:15px;
+}
+
+.app-root{
+  max-width:1200px;
+  margin:24px auto;
+  padding:16px;
+}
+
+h1{font-size:20px;margin:0 0 16px 0;color:var(--text)}
+
+.main-layout{gap:18px}
+
+.card{
+  background:var(--surface);
+  border-radius:var(--radius);
+  padding:var(--card-padding);
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+}
+
+.form-card{padding:18px}
+.preview-card{padding:14px}
+.history-card{padding:12px}
+
+label{display:block;margin-bottom:6px;color:var(--muted-text);font-size:13px}
+input[type="text"], input, select, textarea{
+  width:100%;
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:linear-gradient(180deg, #fff, #fbfdff);
+  color:var(--text);
+}
+
+button{
+  background:var(--accent);
+  color:white;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+button[aria-label][data-testid*="copy"], .btn-ghost{
+  background:transparent;color:var(--accent-600);border:1px solid var(--border);font-weight:600
+}
+
+.action-bar button{padding:10px 14px}
+
+.preview-card pre{
+  margin:0;
+  white-space:pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+  font-size:13px;
+  color:var(--text);
+}
+
+.history-item{padding:10px;border-radius:8px;background:linear-gradient(180deg,#fff,#fcfdff);}
+.history-item + .history-item{margin-top:8px}
+.history-item div{line-height:1.2}
+
+/* Responsive tweaks */
+@media (min-width:900px){
+  .main-layout{display:flex}
+  .form-column{flex:1}
+  .preview-column{width:420px}
+}
