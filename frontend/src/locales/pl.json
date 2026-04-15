@@ -13,11 +13,35 @@
     "preset": "Preset",
     "ageGroup": "Grupa wiekowa",
     "subjectDescription": "Opis tematu (opcjonalnie)",
+    "subjectDescriptionPlaceholder": "np. przyjazny pseudodog siedzący i uśmiechający się",
     "subjectType": "Rodzaj tematu",
+    "subjectTypeOptions": {
+      "character": "postać",
+      "artifact": "artefakt",
+      "anomaly": "anomalie",
+      "mutant": "mutant",
+      "location": "lokacja",
+      "mixed": "mieszane"
+    },
     "artifact": "Artefakt",
     "mutant": "Mutant",
     "location": "Miejsce",
-    "outputLanguage": "Język wyniku"
+    "outputLanguage": "Język wyniku",
+    "none": "— brak —",
+    "choose": "— wybierz —",
+    "selectArtifact": "— wybierz artefakt —",
+    "selectMutant": "— wybierz mutanta —",
+    "selectLocation": "— wybierz miejsce —",
+    "ageOptions": {
+      "under_5": "do 5 lat",
+      "under_10": "do 10 lat",
+      "under_16": "do 16 lat",
+      "16_plus": "16+"
+    },
+    "orientation": "Orientacja",
+    "lineWeight": "Linia",
+    "detailLevel": "Detale",
+    "dpi": "DPI"
   },
   "preview": {
     "title": "Podgląd promptu",

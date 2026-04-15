@@ -4,12 +4,14 @@ import { defineComponent, ref, h as createVNode } from 'vue'
 import PromptFormWithValidation from './components/PromptFormWithValidation'
 import Preview from './components/Preview'
 import HistoryList from './components/HistoryList'
+import useLocale from './locales/useLocale'
 import { saveEntry } from './store/historyStore'
 
 export default defineComponent({
   name: 'App',
   setup() {
     const prompt = ref('')
+    const { t } = useLocale()
 
     function onGenerate(p: string) {
       prompt.value = p
@@ -40,7 +42,7 @@ export default defineComponent({
 
     return () => (
       <div style={{ padding: '16px', fontFamily: 'system-ui' }}>
-        <h1>Generator promptów — Dzieci Zony</h1>
+        <h1>{t('app.title')}</h1>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
           <div style={{ flex: 1 }}>
             <PromptFormWithValidation onGenerate={onGenerate} onPreview={onPreview} loadedSnapshot={latestSnapshot.value} />
@@ -48,7 +50,7 @@ export default defineComponent({
           <div style={{ width: '45%' }}>
             <Preview prompt={prompt.value} />
             <div style={{ marginTop: '12px' }}>
-              <button data-testid="save-current" onClick={saveCurrent}>Zapisz</button>
+              <button data-testid="save-current" onClick={saveCurrent}>{t('app.save')}</button>
             </div>
             <div style={{ marginTop: '12px' }}>
               <HistoryList reloadSignal={historyReload.value} onLoad={(e: any) => { prompt.value = e.generatedPrompt; latestSnapshot.value = e.formSnapshot }} />

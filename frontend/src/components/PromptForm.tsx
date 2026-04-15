@@ -1,10 +1,12 @@
 import { defineComponent, ref } from 'vue'
 import { buildPrompt } from '../lib/promptBuilder'
+import useLocale from '../locales/useLocale'
 
 export default defineComponent({
   name: 'PromptForm',
   emits: ['generate'],
   setup(_, { emit }) {
+    const { t } = useLocale()
     const snapshot = ref<any>({
       ageGroup: 'under_10',
       primarySubject: 'pseudodog',
@@ -22,7 +24,7 @@ export default defineComponent({
 
     return () => (
       <div>
-        <label style={{ display: 'block', marginBottom: '4px' }}>Grupa wiekowa</label>
+        <label style={{ display: 'block', marginBottom: '4px' }}>{t('form.ageGroup')}</label>
         <select
           value={snapshot.value.ageGroup}
           onChange={(e: Event) => {
@@ -30,14 +32,14 @@ export default defineComponent({
             snapshot.value.ageGroup = t.value
           }}
         >
-          <option value="under_5">do 5 lat</option>
-          <option value="under_10">do 10 lat</option>
-          <option value="under_16">do 16 lat</option>
-          <option value="16_plus">16+</option>
+          <option value="under_5">{t('form.ageOptions.under_5')}</option>
+          <option value="under_10">{t('form.ageOptions.under_10')}</option>
+          <option value="under_16">{t('form.ageOptions.under_16')}</option>
+          <option value="16_plus">{t('form.ageOptions.16_plus')}</option>
         </select>
 
         <div style={{ marginTop: '8px' }}>
-          <button onClick={generate}>Generuj prompt</button>
+          <button onClick={generate}>{t('app.generate')}</button>
         </div>
       </div>
     )
