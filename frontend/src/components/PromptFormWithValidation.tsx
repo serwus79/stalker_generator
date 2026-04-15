@@ -7,18 +7,28 @@ import { buildPrompt } from '../lib/promptBuilder'
 
 export default defineComponent({
   name: 'PromptFormWithValidation',
+  props: {
+    loadedSnapshot: { type: Object, default: undefined },
+  },
   emits: ['generate', 'preview'],
-  setup(_, { emit }) {
+  setup(props, { emit }) {
     const defaultSnapshot = FormSchema.parse({}) as FormSnapshot
     const snapshot = ref<FormSnapshot>(defaultSnapshot)
     const errors = ref<Record<string, string>>({})
     const generatedPrompt = ref<string>('')
 
-    // Emit live preview whenever the snapshot changes
+    // Restore snapshot when parent provides one
+    watch(() => props.loadedSnapshot, (ns) => {
+      if (ns) {
+        snapshot.value = ns
+      }
+    }, { deep: true, immediate: true })
+
+    // Emit live preview whenever the snapshot changes (include snapshot)
     watch(snapshot, (val) => {
       try {
         const p = buildPrompt(val)
-        emit('preview', p)
+        emit('preview', { prompt: p, snapshot: val })
       } catch (e) {
         // ignore
       }

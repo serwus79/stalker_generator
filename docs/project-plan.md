@@ -70,7 +70,7 @@ Poniższa tabela dzieli plan na mniejsze kroki; kolumna `Docs` linkuje do szczeg
 |   4 | Napisać `PromptBuilderEngine` (reguły i profile)            | Completed   | [docs/steps/04-prompt-builder-engine.md](docs/steps/04-prompt-builder-engine.md)               |
 |   5 | Zbudować formularz z walidacją (Zod) i dependency fields    | Completed   | [docs/steps/05-form-validation.md](docs/steps/05-form-validation.md)                           |
 |   6 | Dodać live preview, kopiowanie i zapis                      | Completed   | [docs/steps/06-live-preview-copy.md](docs/steps/06-live-preview-copy.md)                       |
-|   7 | Dodać historię w `localStorage` i eksport/import snapshotów | Not started | [docs/steps/07-history-localstorage.md](docs/steps/07-history-localstorage.md)                 |
+|   7 | Dodać historię w `localStorage` i eksport/import snapshotów | Completed   | [docs/steps/07-history-localstorage.md](docs/steps/07-history-localstorage.md)                 |
 |   8 | Lokalizacja UI — język polski (i plik `locales/pl.json`)    | Not started | [docs/steps/12-localization.md](docs/steps/12-localization.md)                                 |
 |   9 | Responsywność, dostępność (A11y) i UX polish                | Not started | [docs/steps/08-responsiveness-accessibility.md](docs/steps/08-responsiveness-accessibility.md) |
 |  10 | Testy jednostkowe i integracyjne                            | Not started | [docs/steps/09-tests.md](docs/steps/09-tests.md)                                               |
