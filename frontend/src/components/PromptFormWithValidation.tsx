@@ -18,6 +18,7 @@ export default defineComponent({
     const snapshot = ref<FormSnapshot>(defaultSnapshot)
     const errors = ref<Record<string, string>>({})
     const generatedPrompt = ref<string>('')
+    const showGlobal = ref<boolean>(false)
     const { t } = useLocale()
 
     function snapshotsEqual(a: FormSnapshot, b: FormSnapshot) {
@@ -135,7 +136,7 @@ export default defineComponent({
     return () => (
       <div class="card form-card">
         {/* Age Group - global, appears once */}
-        <div>
+        {/* <div>
           <label htmlFor="age-select">{t('form.ageGroup')}</label>
           <select id="age-select" value={snapshot.value.ageGroup} onChange={(e: Event) => (snapshot.value.ageGroup = (e.target as HTMLSelectElement).value as any)}>
             <option value="under_5">{t('form.ageOptions.under_5')}</option>
@@ -144,7 +145,7 @@ export default defineComponent({
             <option value="16_plus">{t('form.ageOptions.16_plus')}</option>
           </select>
           {errors.value.ageGroup && <div style={{ color: 'red' }}>{errors.value.ageGroup}</div>}
-        </div>
+        </div> */}
 
         {/* Preset */}
         <div style={{ marginTop: '12px' }}>
@@ -157,78 +158,94 @@ export default defineComponent({
           </select>
         </div>
 
-        {/* Global settings */}
+        {/* Global settings (collapsible) */}
         <div style={{ marginTop: '12px' }}>
-          <label htmlFor="orientation">{t('form.orientation', 'Orientacja')}</label>
-          <select id="orientation" value={snapshot.value.orientation} onChange={(e: Event) => (snapshot.value.orientation = (e.target as HTMLSelectElement).value as any)}>
-            <option value="A4_portrait">A4 Portrait</option>
-            <option value="A4_landscape">A4 Landscape</option>
-            <option value="auto">Auto</option>
-          </select>
+          <button
+            type="button"
+            aria-expanded={showGlobal.value}
+            aria-controls="global-settings"
+            onClick={(e: Event) => { showGlobal.value = !showGlobal.value }}
+            style={{ backgroundColor: '#eee', border: '1px solid #ccc', padding: '6px 10px', borderRadius: '4px', cursor: 'pointer' }}
+          >
+            {showGlobal.value ? t('form.hideGlobalSettings', 'Ukryj ustawienia globalne') : t('form.showGlobalSettings', 'Pokaż ustawienia globalne')}
+          </button>
         </div>
 
-        <div style={{ marginTop: '8px' }}>
-          <label htmlFor="lineWeight">{t('form.lineWeight', 'Grubość linii')}</label>
-          <select id="lineWeight" value={snapshot.value.lineWeight} onChange={(e: Event) => (snapshot.value.lineWeight = (e.target as HTMLSelectElement).value as any)}>
-            <option value="very_thick">Very Thick</option>
-            <option value="thick_comic">Thick Comic</option>
-            <option value="medium">Medium</option>
-            <option value="fine">Fine</option>
-          </select>
-        </div>
+        {showGlobal.value && (
+          <div id="global-settings" style={{ marginTop: '8px' }}>
+            <div style={{ marginTop: '8px' }}>
+              <label htmlFor="orientation">{t('form.orientation', 'Orientacja')}</label>
+              <select id="orientation" value={snapshot.value.orientation} onChange={(e: Event) => (snapshot.value.orientation = (e.target as HTMLSelectElement).value as any)}>
+                <option value="A4_portrait">A4 Portrait</option>
+                <option value="A4_landscape">A4 Landscape</option>
+                <option value="auto">Auto</option>
+              </select>
+            </div>
 
-        <div style={{ marginTop: '8px' }}>
-          <label htmlFor="detailLevel">{t('form.detailLevel', 'Poziom detali')}</label>
-          <select id="detailLevel" value={snapshot.value.detailLevel} onChange={(e: Event) => (snapshot.value.detailLevel = (e.target as HTMLSelectElement).value as any)}>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="medium_high">Medium High</option>
-            <option value="high">High</option>
-          </select>
-        </div>
+            <div style={{ marginTop: '8px' }}>
+              <label htmlFor="lineWeight">{t('form.lineWeight', 'Grubość linii')}</label>
+              <select id="lineWeight" value={snapshot.value.lineWeight} onChange={(e: Event) => (snapshot.value.lineWeight = (e.target as HTMLSelectElement).value as any)}>
+                <option value="very_thick">Very Thick</option>
+                <option value="thick_comic">Thick Comic</option>
+                <option value="medium">Medium</option>
+                <option value="fine">Fine</option>
+              </select>
+            </div>
 
-        <div style={{ marginTop: '8px' }}>
-          <label htmlFor="composition">{t('form.composition', 'Kompozycja')}</label>
-          <select id="composition" value={snapshot.value.composition} onChange={(e: Event) => (snapshot.value.composition = (e.target as HTMLSelectElement).value as any)}>
-            <option value="centered">Centered</option>
-            <option value="full_figure">Full Figure</option>
-            <option value="panorama">Panorama</option>
-            <option value="low_angle">Low Angle</option>
-            <option value="dynamic_action">Dynamic Action</option>
-          </select>
-        </div>
+            <div style={{ marginTop: '8px' }}>
+              <label htmlFor="detailLevel">{t('form.detailLevel', 'Poziom detali')}</label>
+              <select id="detailLevel" value={snapshot.value.detailLevel} onChange={(e: Event) => (snapshot.value.detailLevel = (e.target as HTMLSelectElement).value as any)}>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="medium_high">Medium High</option>
+                <option value="high">High</option>
+              </select>
+            </div>
 
-        <div style={{ marginTop: '8px' }}>
-          <label htmlFor="dpi">{t('form.dpi', 'DPI')}</label>
-          <input
-            id="dpi"
-            type="number"
-            value={snapshot.value.dpi}
-            onInput={(e: Event) => (snapshot.value.dpi = parseInt((e.target as HTMLInputElement).value, 10))}
-          />
-        </div>
+            <div style={{ marginTop: '8px' }}>
+              <label htmlFor="composition">{t('form.composition', 'Kompozycja')}</label>
+              <select id="composition" value={snapshot.value.composition} onChange={(e: Event) => (snapshot.value.composition = (e.target as HTMLSelectElement).value as any)}>
+                <option value="centered">Centered</option>
+                <option value="full_figure">Full Figure</option>
+                <option value="panorama">Panorama</option>
+                <option value="low_angle">Low Angle</option>
+                <option value="dynamic_action">Dynamic Action</option>
+              </select>
+            </div>
 
-        <div style={{ marginTop: '8px' }}>
-          <label htmlFor="margin">{t('form.margin', 'Margines (mm)')}</label>
-          <input
-            id="margin"
-            type="number"
-            value={snapshot.value.marginMm}
-            onInput={(e: Event) => (snapshot.value.marginMm = parseInt((e.target as HTMLInputElement).value, 10))}
-          />
-        </div>
+            <div style={{ marginTop: '8px' }}>
+              <label htmlFor="dpi">{t('form.dpi', 'DPI')}</label>
+              <input
+                id="dpi"
+                type="number"
+                value={snapshot.value.dpi}
+                onInput={(e: Event) => (snapshot.value.dpi = parseInt((e.target as HTMLInputElement).value, 10))}
+              />
+            </div>
 
-        <div style={{ marginTop: '8px' }}>
-          <label htmlFor="enforceNoGray">
-            <input
-              id="enforceNoGray"
-              type="checkbox"
-              checked={snapshot.value.enforceNoGray}
-              onChange={(e: Event) => (snapshot.value.enforceNoGray = (e.target as HTMLInputElement).checked)}
-            />
-            {t('form.enforceNoGray', 'Bez szarościanki')}
-          </label>
-        </div>
+            <div style={{ marginTop: '8px' }}>
+              <label htmlFor="margin">{t('form.margin', 'Margines (mm)')}</label>
+              <input
+                id="margin"
+                type="number"
+                value={snapshot.value.marginMm}
+                onInput={(e: Event) => (snapshot.value.marginMm = parseInt((e.target as HTMLInputElement).value, 10))}
+              />
+            </div>
+
+            <div style={{ marginTop: '8px' }}>
+              <label htmlFor="enforceNoGray">
+                <input
+                  id="enforceNoGray"
+                  type="checkbox"
+                  checked={snapshot.value.enforceNoGray}
+                  onChange={(e: Event) => (snapshot.value.enforceNoGray = (e.target as HTMLInputElement).checked)}
+                />
+                {t('form.enforceNoGray', 'Bez szarościanki')}
+              </label>
+            </div>
+          </div>
+        )}
 
         {/* Subjects array - multiple entries */}
         <div style={{ marginTop: '20px', borderTop: '2px solid #ccc', paddingTop: '12px' }}>
