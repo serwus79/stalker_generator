@@ -44,7 +44,7 @@ jobs:
 
       - name: Build frontend
         working-directory: frontend
-        run: npm run build --silent
+        run: npm run build -- --base /stalker_generator/
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
