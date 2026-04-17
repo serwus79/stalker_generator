@@ -46,7 +46,8 @@
   "preview": {
     "title": "Podgląd promptu",
     "copy": "Kopiuj",
-    "copied": "Skopiowano!"
+    "copied": "Skopiowano!",
+    "hint": "Możesz wkleić ten prompt do swojego ulubionego narzędzia do generowania obrazów."
   },
   "history": {
     "load": "Wczytaj",

@@ -44,6 +44,8 @@ export default defineComponent({
         <div style={{ marginTop: '8px' }}>
           <button data-testid="preview-copy" aria-label={t('preview.copy')} onClick={copyToClipboard}>{t('preview.copy')}</button>
           {copied.value && <span data-testid="preview-toast" role="status" aria-live="polite" style={{ marginLeft: '8px' }}>{t('preview.copied')}</span>}
+          <br />
+          <span style={{ fontSize: '0.9em', color: '#666' }}>{t('preview.hint')}</span>
         </div>
       </div>
     )

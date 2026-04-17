@@ -165,7 +165,7 @@ export default defineComponent({
             aria-expanded={showGlobal.value}
             aria-controls="global-settings"
             onClick={(e: Event) => { showGlobal.value = !showGlobal.value }}
-            style={{ backgroundColor: '#eee', border: '1px solid #ccc', padding: '6px 10px', borderRadius: '4px', cursor: 'pointer' }}
+            style={{  border: '1px solid #ccc', padding: '6px 10px', borderRadius: '4px', cursor: 'pointer' }}
           >
             {showGlobal.value ? t('form.hideGlobalSettings', 'Ukryj ustawienia globalne') : t('form.showGlobalSettings', 'Pokaż ustawienia globalne')}
           </button>
