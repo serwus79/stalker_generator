@@ -160,7 +160,7 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
     prompt += ' absolutely no gray fills, no shading, white areas only between black lines, coloring book style, print-ready'
   }
 
-  prompt+="USE REAL RADIATION SIGN BUT WITHOUT COLORS not dummy images of it. The radiation sign should be clearly recognizable and look authentic, not like a generic warning symbol. It should fit the overall style of the coloring page and be prominently featured if included.";
+  prompt+=" USE REAL RADIATION SIGN BUT WITHOUT COLORS not dummy images of it. The radiation sign should be clearly recognizable and look authentic, not like a generic warning symbol. It should fit the overall style of the coloring page and be prominently featured if included.";
   prompt+=" USE THIS PROMPT AS A WHOLE, DO NOT OMIT ANY PART OF IT. This is a prompt for an AI image generator, not for a human artist. Focus on the content and style instructions, do not add any extra commentary or explanations."
 
   return prompt
