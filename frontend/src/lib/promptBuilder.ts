@@ -24,6 +24,7 @@ function getSubjectTypeLabel(type?: string): string {
     mutant: 'mutant',
     location: 'location',
     mixed: 'mixed',
+    radiation_sign: 'radiation sign',
   }
   return map[type || 'mixed'] || 'subject'
 }
@@ -39,6 +40,7 @@ function getSubjectTypeLabelPl(type?: string): string {
     mutant: 'mutant',
     location: 'lokacja',
     mixed: 'mieszane',
+    radiation_sign: 'znak radiacji',
   }
   return map[type || 'mixed'] || 'przedmiot'
 }
@@ -85,6 +87,7 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
   const s = snapshot || {}
   const lang = (s.outputLanguage || language || 'pl').toLowerCase()
   const subjects = s.subjects || []
+  const hasRadiationSign = subjects.some(subj => subj.subjectType === 'radiation_sign')
 
   const orientationIsLandscape = s.orientation === 'A4_landscape'
   const dpi = s.dpi || 300
@@ -114,6 +117,11 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
     if (s.enforceNoGray) {
       prompt += ' absolutely no gray fills, no shading, white areas only between black lines, coloring book style, print-ready'
     }
+    if (hasRadiationSign) {
+      prompt += ' Include a realistic radiation trefoil sign (radioactive symbol), rendered as a clear outline suitable for coloring — no colors, only black outlines and white fill. Make it clearly recognizable and authentic, not a generic warning icon. Prominently feature it when the subject is a radiation sign.'
+    }
+    // Request output format
+    prompt += ' Generate the final artwork as an image file in JPG or PNG format (PNG preferred for lossless quality).'
     return prompt
   }
 
@@ -159,9 +167,15 @@ export function buildPrompt(snapshot: Snapshot = {}, language = 'pl') {
     // the anti-gray suffix is helpful for many generators — keep it in English as a strict instruction
     prompt += ' absolutely no gray fills, no shading, white areas only between black lines, coloring book style, print-ready'
   }
+  if (hasRadiationSign) {
+    prompt += ' Zawiera realistyczny znak radiacji (symbol trójskrzydłowy) przedstawiony jako kontur do kolorowania — bez kolorów, tylko czarne kontury i białe wypełnienie. Powinien być wyraźny i autentyczny, nie uproszczony znak ostrzegawczy. Wyeksponuj go, gdy temat to znak radiacji.'
+  }
 
-  prompt+=" USE REAL RADIATION SIGN BUT WITHOUT COLORS not dummy images of it. The radiation sign should be clearly recognizable and look authentic, not like a generic warning symbol. It should fit the overall style of the coloring page and be prominently featured if included.";
-  prompt+=" USE THIS PROMPT AS A WHOLE, DO NOT OMIT ANY PART OF IT. This is a prompt for an AI image generator, not for a human artist. Focus on the content and style instructions, do not add any extra commentary or explanations."
+  // Output format instruction in Polish
+  prompt += ' Wygeneruj plik graficzny w formacie JPG lub PNG (preferowane PNG dla bezstratnej jakości).'
+
+  // Keep the final strict instruction
+  prompt += ' USE THIS PROMPT AS A WHOLE, DO NOT OMIT ANY PART OF IT. This is a prompt for an AI image generator, not for a human artist. Focus on the content and style instructions, do not add any extra commentary or explanations.'
 
   return prompt
 }

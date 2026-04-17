@@ -21,8 +21,11 @@
       "anomaly": "anomalie",
       "mutant": "mutant",
       "location": "lokacja",
+      "radiation_sign": "znak radiacji",
       "mixed": "mieszane"
     },
+    "showGlobalSettings": "Pokaż ustawienia globalne",
+    "hideGlobalSettings": "Ukryj ustawienia globalne",
     "artifact": "Artefakt",
     "mutant": "Mutant",
     "location": "Miejsce",

@@ -275,6 +275,7 @@ export default defineComponent({
                       <option value="anomaly">{t('form.subjectTypeOptions.anomaly', 'anomaly')}</option>
                       <option value="mutant">{t('form.subjectTypeOptions.mutant', 'mutant')}</option>
                       <option value="location">{t('form.subjectTypeOptions.location', 'location')}</option>
+                      <option value="radiation_sign">{t('form.subjectTypeOptions.radiation_sign', 'znak radiacji')}</option>
                       <option value="mixed">{t('form.subjectTypeOptions.mixed', 'mixed')}</option>
                     </select>
                   </div>

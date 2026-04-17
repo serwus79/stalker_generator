@@ -3,7 +3,7 @@ import { z } from 'zod'
 // Single subject entry
 const SubjectEntrySchema = z.object({
   id: z.string(),
-  subjectType: z.enum(['character', 'artifact', 'anomaly', 'mutant', 'location', 'mixed']),
+  subjectType: z.enum(['character', 'artifact', 'anomaly', 'mutant', 'location', 'mixed', 'radiation_sign']),
   primarySubject: z.string().optional(),
   subjectDescription: z.string().optional(),
 })
